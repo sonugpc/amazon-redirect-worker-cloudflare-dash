@@ -1,0 +1,28 @@
+{
+  "name": "amazon-redirect-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker for Amazon affiliate link redirects",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:staging": "wrangler deploy --env staging",
+    "deploy:production": "wrangler deploy --env production"
+  },
+  "keywords": [
+    "cloudflare",
+    "worker",
+    "amazon",
+    "redirect",
+    "affiliate"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.66.0",
+    "sqlite3": "^5.1.7"
+  }
+}

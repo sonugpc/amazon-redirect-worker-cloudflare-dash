@@ -1,0 +1,10 @@
+name = "amazon-redirect-worker"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+name = "amazon-redirect-worker"
+
+[env.staging]
+name = "amazon-redirect-worker-staging"
