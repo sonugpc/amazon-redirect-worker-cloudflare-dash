@@ -116,7 +116,7 @@ function generateHTML(targetUrl, invalid, logoUrl = '') {
         ${invalid ? 
             `<p class="error-message">Invalid or missing URL. Please check the link and try again.</p>` :
             `
-            <h2>Redirecting to our partner</h2>
+            <h2>Redirecting to Amazon</h2>
             <p>Please wait while we securely transfer you to Amazon.</p>
             <div class="spinner"></div>
             <img src="${logoUrl}" alt="Amazon" class="partner-logo">
