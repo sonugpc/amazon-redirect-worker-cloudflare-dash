@@ -23,7 +23,7 @@ export default {
     }
     
     const logo = {
-      'amazon': 'https://www.bigtricks.in/wp-content/uploads/2020/06/amazon-logo-150x100.png'
+      'amazon': 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg'
     };
     
     // Generate HTML response
@@ -39,65 +39,92 @@ export default {
 };
 
 function generateHTML(targetUrl, invalid, logoUrl = '') {
-  const metaRefresh = !invalid && targetUrl ? 
-    `<meta http-equiv="refresh" content="0;URL='${targetUrl}'" />` : '';
-  
+  const metaRefresh = !invalid && targetUrl ? `<meta http-equiv="refresh" content="0;URL='${targetUrl}'" />` : '';
+
   return `<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="theme-color" content="#007aff" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="Referrer" content="origin" />
-    <meta name="robots" content="noindex" />
-    <style type="text/css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <meta name="robots" content="noindex">
+    ${metaRefresh}
+    <style>
         body, html {
             height: 100%;
             margin: 0;
-            font-family: helvetica;
-            font-weight: 100;
-            z-index: 1;
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .redirectbox {
-            height: 350px;
+        .container {
             background-color: #ffffff;
-            border-width: 1px;
-            border-radius: 1rem;
-            border: 1px solid #eee;
-            width: 80vw;
-            box-shadow: 0 12px 25px rgb(0 0 0 / 20%);
-            border: transparent;
-            display: flex;
-            flex-flow: column;
-            align-items: center;
-            justify-content: center;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
         }
-        body {
-            display: flex;
-            flex-flow: column;
-            align-items: center;
-            justify-content: center;
+        .logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+        .partner-logo {
+            max-width: 120px;
+            margin: 20px 0;
+        }
+        h2 {
+            font-size: 1.25rem;
+            color: #333;
+            margin: 0 0 15px;
+        }
+        p {
+            color: #666;
+            margin: 0 0 25px;
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #007aff;
+            animation: spin 1s ease infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .footer-text {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 20px;
+        }
+        .error-message {
+            color: #d9534f;
+            font-weight: 600;
         }
     </style>
-    <title>Redirecting to Amazon</title>
-    ${metaRefresh}
 </head>
 <body>
-    <div class="redirectbox">
-        <div align="center" style="margin-top:5px">
-            <img width="auto" src="https://www.bigtricks.in/wp-content/uploads/2021/01/bt4-.png" alt="Bigtricks.in, Free Recharge Tricks, Cashback Offers & Loot Deals">
-        </div>
-        <div align="center">
-            <b><span id="lblRedirect">Redirecting you to Partner website Please Wait.....</span></b>
-        </div>
-        <div align="center">
-            ${!invalid && targetUrl ? 
-                `<img id="Image1" src="${logoUrl}" style="height:100px;" />` : 
-                'Invalid URL'
-            }
-        </div>
-        <div>
-            <b><span id="lblKeep">Keep Visiting us For more offers & deals</span></b>
-        </div>
+    <div class="container">
+        <img src="https://www.bigtricks.in/wp-content/uploads/2021/01/bt4-.png" alt="Bigtricks.in" class="logo">
+        
+        ${invalid ? 
+            `<p class="error-message">Invalid or missing URL. Please check the link and try again.</p>` :
+            `
+            <h2>Redirecting to our partner</h2>
+            <p>Please wait while we securely transfer you to Amazon.</p>
+            <div class="spinner"></div>
+            <img src="${logoUrl}" alt="Amazon" class="partner-logo">
+            `
+        }
+        
+        <p class="footer-text">Thank you for visiting Bigtricks!</p>
+        <p class="footer-text" style="font-size: 0.8rem; color: #999; margin-top: 10px;">As an Amazon Associate, we earn from qualifying purchases.</p>
     </div>
 </body>
 </html>`;
